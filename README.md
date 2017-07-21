@@ -1,2 +1,3 @@
-# csharp-html-formatter
-Formats C# code copied as HTML
+# C# HTML Formatter
+
+Formats C# code copied as HTML.
