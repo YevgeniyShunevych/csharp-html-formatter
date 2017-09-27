@@ -50,7 +50,9 @@ namespace CSharpHtmlFormatter
         {
             string memberTail = null;
 
-            int startIndexOfTail = memberBody.IndexOfAny(new[] { '(', '{', '=' });
+            string memberBodyCopy = memberBody;
+            int[] indicesOfTailSeparator = new[] { "(", "{", "= " }.Select(x => memberBodyCopy.IndexOf(x)).Where(x => x != -1).ToArray();
+            int startIndexOfTail = indicesOfTailSeparator.Any() ? indicesOfTailSeparator.Min() : -1;
 
             if (startIndexOfTail != -1)
             {
@@ -97,7 +99,7 @@ namespace CSharpHtmlFormatter
             if (head != null)
             {
                 builder.
-                    Append($"    <span class=\"head\">{head}</span>");
+                    Append($"    <span class=\"head\">{head}</span>").AppendLine();
             }
 
             builder.
